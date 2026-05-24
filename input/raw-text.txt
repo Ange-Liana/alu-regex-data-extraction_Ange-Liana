@@ -1,0 +1,54 @@
+System log report - May 2026
+
+The following contacts were collected from recent platform activity.
+
+Main support emails:
+support@alueducation.com
+admissions.office@alueducation.com
+
+SI department:
+student.help@si.alueducation.com
+
+Former student accounts:
+grace2022@alumni.alueducation.com
+patrick.dev@alumni.alueducation.com
+
+Suspicious or malformed emails detected:
+admin@@gmail..com
+fake-email@com
+user<script>@mail.com
+
+Payment records submitted:
+4532 9911 4455 7732
+5500-0000-0000-0004
+1234 5678 999
+
+Potentially unsafe card input:
+4111-1111-1111-1111 DROP TABLE payments;
+
+Phone numbers received:
++250 788 123 456
++1 (202) 555-0198
+0788123456
+
+Invalid phone entries:
+123-ABCD-789
++250-77
+
+Trending hashtags from event posts:
+#ALU
+#TechConference2026
+#frontend_dev
+#BuildTheFuture
+
+Invalid hashtags:
+#!!!
+#bad tag
+
+Random unsafe input:
+<script>alert('hacked')</script>
+DROP TABLE users;
+SELECT * FROM passwords;
+
+End of extracted report.
+
