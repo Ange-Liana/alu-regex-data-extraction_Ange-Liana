@@ -11,10 +11,10 @@ email_regex = r'\b[a-zA-Z0-9._%+-]+@(alueducation\.com|alumni\.alueducation\.com
 #regex for credit card numbers
 card_regex = r'\b(?:\d{4}[- ]?){3}\d{4}\b'
 
-# regex for phone numbers
+#regex for phone numbers
 phone_regex = r'(?:\+\d{1,3}[\s-]?)?(?:\(?\d{2,4}\)?[\s-]?)?\d{3}[\s-]?\d{3}[\s-]?\d{4}'
 
-# Regex for hashtags
+#Regex for hashtags
 hashtag_regex = r'#[A-Za-z0-9_]+'
 
 found_emails = re.finditer(email_regex, content)
@@ -24,7 +24,7 @@ found_hashtags = re.findall(hashtag_regex, content)
 
 valid_emails = []
 
-# Ignoring suspicious email inputs
+#Ignoring suspicious email inputs
 for item in found_emails:
     full_email = item.group()
 
@@ -35,7 +35,7 @@ valid_emails = list(dict.fromkeys(valid_emails))
 found_cards = list(dict.fromkeys(found_cards))
 found_hashtags = list(dict.fromkeys(found_hashtags))
 
-# clean phone results 
+#clean phone results 
 clean_phones = []
 
 for p in found_phones:
@@ -46,7 +46,7 @@ for p in found_phones:
 
 secured_cards = []
 
-# Hiding part of the credit card numbers
+#Hiding part of the credit card numbers
 for number in found_cards:
     cleaned = re.sub(r'[- ]', '', number)
 
@@ -70,7 +70,7 @@ json.dump(results, output, indent=4)
 
 output.close()
 
-# printing the final extracted results(output) to the console 
+#printing the final extracted results(output) to the console 
 
 print(json.dumps(results, indent=4))
 
