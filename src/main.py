@@ -1,18 +1,19 @@
 import re
 import json
 
+#reading the raw data or input from .txt file
 file = open("../input/raw-text.txt", "r", encoding="utf-8")
 content = file.read()
 file.close()
 
 #regex for ALU email addresses
-email_regex = r'\b[a-zA-Z0-9._%+-]+@(alueducation\.com|alumni\.alueducation\.com|si\.alueducation\.com)\b'
+email_regex = r'[a-zA-Z0-9._%+-]+@(alueducation\.com|alumni\.alueducation\.com|si\.alueducation\.com)'
 
 #regex for credit card numbers
-card_regex = r'\b(?:\d{4}[- ]?){3}\d{4}\b'
+card_regex = r'\b\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}\b'
 
 #regex for phone numbers
-phone_regex = r'(?:\+\d{1,3}[\s-]?)?(?:\(?\d{2,4}\)?[\s-]?)?\d{3}[\s-]?\d{3}[\s-]?\d{4}'
+phone_regex = r'(\+\d{1,3}[\s-]?\d{3}[\s-]?\d{3}[\s-]?\d{3,4}|\b\d{10}\b)'
 
 #Regex for hashtags
 hashtag_regex = r'#[A-Za-z0-9_]+'
@@ -24,12 +25,19 @@ found_hashtags = re.findall(hashtag_regex, content)
 
 valid_emails = []
 
-#Ignoring suspicious email inputs
+# Ignoring suspicious email inputs
 for item in found_emails:
     full_email = item.group()
 
     if ".." not in full_email and "<script>" not in full_email.lower() and " " not in full_email:
-        valid_emails.append(full_email)
+        
+        parts = full_email.split("@")
+        username = parts[0]
+        domain = parts[1]
+
+        hidden_email = username[:2] + "***@" + domain
+
+        valid_emails.append(hidden_email)
 
 valid_emails = list(dict.fromkeys(valid_emails))
 found_cards = list(dict.fromkeys(found_cards))
@@ -54,7 +62,7 @@ for number in found_cards:
         hidden = "************" + cleaned[-4:]
         secured_cards.append(hidden)
 
-# organizing the extracted datasets 
+#organizing the extracted datasets 
 results = {
     "emails": valid_emails,
     "credit_cards": secured_cards,
@@ -70,8 +78,6 @@ json.dump(results, output, indent=4)
 
 output.close()
 
-#printing the final extracted results(output) to the console 
+# printing the final extracted results(output) to the console 
 
 print(json.dumps(results, indent=4))
-
-
